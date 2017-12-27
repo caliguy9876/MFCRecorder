@@ -134,7 +134,7 @@ class Config():
                 return False
             if f.wanted_tags:
                 matches = f.wanted_tags.intersection(model.tags if model.tags is not None else [])
-                if len(matches) >= f.min_tags and model.session['rc'] >= f.tag_viewers:
+                if len(matches) >= f.min_tags and model.session['rc'] >= f.tag_viewers and f.wanted.is_blacklisted(model.uid) is True:
                     model.session['condition'] = helpers.Condition.TAGS
                     model.session['condition-text'] = ','.join(matches)
                     return True
